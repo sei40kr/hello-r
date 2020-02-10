@@ -1,0 +1,272 @@
+#+BEGIN_SRC jupyter-R :session R
+# load in packages we'll use
+library(tidyverse) # utility functions
+library(rpart) # for regression trees
+library(randomForest) # for random forests
+
+# read the data and store data in DataFrame titled melbourne_data
+melbourne_data <- read_csv('../data/input/melb_data.csv')
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+── [1mAttaching packages[22m ─────────────────────────────────────── tidyverse 1.3.0 ──
+
+[32m✔[39m [34mggplot2[39m 3.2.1     [32m✔[39m [34mpurrr  [39m 0.3.3
+[32m✔[39m [34mtibble [39m 2.1.3     [32m✔[39m [34mdplyr  [39m 0.8.4
+[32m✔[39m [34mtidyr  [39m 1.0.2     [32m✔[39m [34mstringr[39m 1.4.0
+[32m✔[39m [34mreadr  [39m 1.3.1     [32m✔[39m [34mforcats[39m 0.4.0
+
+── [1mConflicts[22m ────────────────────────────────────────── tidyverse_conflicts() ──
+[31m✖[39m [34mdplyr[39m::[32mfilter()[39m masks [34mstats[39m::filter()
+[31m✖[39m [34mdplyr[39m::[32mlag()[39m    masks [34mstats[39m::lag()
+
+randomForest 4.6-14
+
+Type rfNews() to see new features/changes/bug fixes.
+
+
+Attaching package: ‘randomForest’
+
+
+The following object is masked from ‘package:dplyr’:
+
+    combine
+
+
+The following object is masked from ‘package:ggplot2’:
+
+    margin
+
+
+Parsed with column specification:
+cols(
+  .default = col_double(),
+  Suburb = [31mcol_character()[39m,
+  Address = [31mcol_character()[39m,
+  Type = [31mcol_character()[39m,
+  Method = [31mcol_character()[39m,
+  SellerG = [31mcol_character()[39m,
+  Date = [31mcol_character()[39m,
+  CouncilArea = [31mcol_character()[39m,
+  Regionname = [31mcol_character()[39m
+)
+
+See spec(...) for full column specifications.
+#+end_example
+
+#+BEGIN_SRC jupyter-R :session R
+summary(melbourne_data)
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+    Suburb            Address              Rooms            Type
+ Length:13580       Length:13580       Min.   : 1.000   Length:13580
+ Class :character   Class :character   1st Qu.: 2.000   Class :character
+ Mode  :character   Mode  :character   Median : 3.000   Mode  :character
+                                       Mean   : 2.938
+                                       3rd Qu.: 3.000
+                                       Max.   :10.000
+
+     Price            Method            SellerG              Date
+ Min.   :  85000   Length:13580       Length:13580       Length:13580
+ 1st Qu.: 650000   Class :character   Class :character   Class :character
+ Median : 903000   Mode  :character   Mode  :character   Mode  :character
+ Mean   :1075684
+ 3rd Qu.:1330000
+ Max.   :9000000
+
+    Distance        Postcode       Bedroom2         Bathroom
+ Min.   : 0.00   Min.   :3000   Min.   : 0.000   Min.   :0.000
+ 1st Qu.: 6.10   1st Qu.:3044   1st Qu.: 2.000   1st Qu.:1.000
+ Median : 9.20   Median :3084   Median : 3.000   Median :1.000
+ Mean   :10.14   Mean   :3105   Mean   : 2.915   Mean   :1.534
+ 3rd Qu.:13.00   3rd Qu.:3148   3rd Qu.: 3.000   3rd Qu.:2.000
+ Max.   :48.10   Max.   :3977   Max.   :20.000   Max.   :8.000
+
+      Car           Landsize         BuildingArea     YearBuilt
+ Min.   : 0.00   Min.   :     0.0   Min.   :    0   Min.   :1196
+ 1st Qu.: 1.00   1st Qu.:   177.0   1st Qu.:   93   1st Qu.:1940
+ Median : 2.00   Median :   440.0   Median :  126   Median :1970
+ Mean   : 1.61   Mean   :   558.4   Mean   :  152   Mean   :1965
+ 3rd Qu.: 2.00   3rd Qu.:   651.0   3rd Qu.:  174   3rd Qu.:1999
+ Max.   :10.00   Max.   :433014.0   Max.   :44515   Max.   :2018
+ NA's   :62                         NA's   :6450    NA's   :5375
+ CouncilArea          Lattitude        Longtitude     Regionname
+ Length:13580       Min.   :-38.18   Min.   :144.4   Length:13580
+ Class :character   1st Qu.:-37.86   1st Qu.:144.9   Class :character
+ Mode  :character   Median :-37.80   Median :145.0   Mode  :character
+                    Mean   :-37.81   Mean   :145.0
+                    3rd Qu.:-37.76   3rd Qu.:145.1
+                    Max.   :-37.41   Max.   :145.5
+
+ Propertycount
+ Min.   :  249
+ 1st Qu.: 4380
+ Median : 6555
+ Mean   : 7454
+ 3rd Qu.:10331
+ Max.   :21650
+#+end_example
+
+#+BEGIN_SRC jupyter-R :session R
+# train a decision tree based on our dataset
+fit <- rpart(Price ~ Rooms + Bathroom + Landsize + BuildingArea
+             + YearBuilt + Lattitude + Longtitude, data = melbourne_data)
+#+END_SRC
+
+#+RESULTS:
+
+#+BEGIN_SRC jupyter-R :session R
+# plot our regression tree
+plot(fit, uniform=TRUE)
+# add text labels & make them 60% as big as they are by default
+text(fit, cex=.6)
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+#+attr_org: :width 420 :height 420
+[[file:./.ob-jupyter/a2dda26bb406ee2eb25d74b8a9093308aefb4750.png]]
+:END:
+
+#+BEGIN_SRC jupyter-R :session R
+print('Making predictions for the following 5 houses:')
+head(melbourne_data)
+
+print('The predictions are')
+predict(fit, head(melbourne_data))
+
+print('Actual price')
+head(melbourne_data$Price)
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+: [1] "Making predictions for the following 5 houses:"
+#+begin_export markdown
+
+A tibble: 6 × 21
+
+| Suburb &lt;chr&gt; | Address &lt;chr&gt; | Rooms &lt;dbl&gt; | Type &lt;chr&gt; | Price &lt;dbl&gt; | Method &lt;chr&gt; | SellerG &lt;chr&gt; | Date &lt;chr&gt; | Distance &lt;dbl&gt; | Postcode &lt;dbl&gt; | ⋯ ⋯ | Bathroom &lt;dbl&gt; | Car &lt;dbl&gt; | Landsize &lt;dbl&gt; | BuildingArea &lt;dbl&gt; | YearBuilt &lt;dbl&gt; | CouncilArea &lt;chr&gt; | Lattitude &lt;dbl&gt; | Longtitude &lt;dbl&gt; | Regionname &lt;chr&gt; | Propertycount &lt;dbl&gt; |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| Abbotsford | 85 Turner St     | 2 | h | 1480000 | S  | Biggin | 3/12/2016 | 2.5 | 3067 | ⋯ | 1 | 1 | 202 |  NA |   NA | Yarra | -37.7996 | 144.9984 | Northern Metropolitan | 4019 |
+| Abbotsford | 25 Bloomburg St  | 2 | h | 1035000 | S  | Biggin | 4/02/2016 | 2.5 | 3067 | ⋯ | 1 | 0 | 156 |  79 | 1900 | Yarra | -37.8079 | 144.9934 | Northern Metropolitan | 4019 |
+| Abbotsford | 5 Charles St     | 3 | h | 1465000 | SP | Biggin | 4/03/2017 | 2.5 | 3067 | ⋯ | 2 | 0 | 134 | 150 | 1900 | Yarra | -37.8093 | 144.9944 | Northern Metropolitan | 4019 |
+| Abbotsford | 40 Federation La | 3 | h |  850000 | PI | Biggin | 4/03/2017 | 2.5 | 3067 | ⋯ | 2 | 1 |  94 |  NA |   NA | Yarra | -37.7969 | 144.9969 | Northern Metropolitan | 4019 |
+| Abbotsford | 55a Park St      | 4 | h | 1600000 | VB | Nelson | 4/06/2016 | 2.5 | 3067 | ⋯ | 1 | 2 | 120 | 142 | 2014 | Yarra | -37.8072 | 144.9941 | Northern Metropolitan | 4019 |
+| Abbotsford | 129 Charles St   | 2 | h |  941000 | S  | Jellis | 7/05/2016 | 2.5 | 3067 | ⋯ | 1 | 0 | 181 |  NA |   NA | Yarra | -37.8041 | 144.9953 | Northern Metropolitan | 4019 |
+#+end_export
+: [1] "The predictions are"
+#+begin_export markdown
+1
+:   721397.6969276972
+:   721397.6969276973
+:   1310592.097329894
+:   1310592.097329895
+:   1741821.143824036
+:   721397.696927697
+#+end_export
+: [1] "Actual price"
+#+begin_export markdown
+1. 1480000
+2. 1035000
+3. 1465000
+4. 850000
+5. 1600000
+6. 941000
+#+end_export
+:END:
+
+#+BEGIN_SRC jupyter-R :session R
+library(modelr)
+
+# get the mean average error for our model
+mae(model = fit, data = melbourne_data)
+#+END_SRC
+
+#+RESULTS:
+#+begin_export markdown
+302465.634427919
+#+end_export
+
+#+BEGIN_SRC jupyter-R :session R
+# split our data so that 30% is in the test set and 70% is in the training set
+splitData <- resample_partition(melbourne_data, c(test = 0.3, train = 0.7))
+
+# how many cases are in test & training set?
+lapply(splitData, dim)
+#+END_SRC
+
+#+RESULTS:
+#+begin_export markdown
+$test
+:   1. 4073
+2. 21
+
+
+
+$train
+:   1. 9507
+2. 21
+#+end_export
+
+#+BEGIN_SRC jupyter-R :session R
+# fit a new model to our training set
+fit2 <- rpart(Price ~ Rooms + Bathroom + Landsize + BuildingArea +
+              YearBuilt + Lattitude + Longtitude, data = splitData$train)
+
+# get the mean average error for our new model, based on our test data
+mae(model = fit2, data = splitData$test)
+#+END_SRC
+
+#+RESULTS:
+#+begin_export markdown
+298109.622327527
+#+end_export
+
+#+BEGIN_SRC jupyter-R :session R
+# a function to get the maximum average error for a given max depth. You should pass in
+# the target as the name of the target column and the predictors as vector where
+# each item in the vector is the name of the column
+get_mae <- function(maxdepth, target, predictors, training_data, testing_data) {
+    # turn the predictors & target into a formula to pass to rpart()
+    predictors <- paste(predictors, collapse = '+')
+    formula <- as.formula(paste(target, '~', predictors, sep = ''))
+
+    # build our model
+    model <- rpart(formula, data = training_data,
+                   control = rpart.control(maxdepth = maxdepth))
+
+    # get mae
+    mae <- mae(model, testing_data)
+    return(mae)
+}
+#+END_SRC
+
+#+RESULTS:
+
+#+BEGIN_SRC jupyter-R :session R
+target <- 'Price'
+predictors <- c('Rooms', 'Bathroom', 'Landsize', 'BuildingArea', 'YearBuilt', 'Lattitude', 'Longtitude')
+
+# get the MAE for maxdepths between 1 & 10
+for (i in 1:10) {
+    mae <- get_mae(maxdepth = i, target = target, predictors = predictors,
+                training_data = splitData$train, testing_data = splitData$test)
+     print(glue::glue('Maxdepth: ', i, '\t MAE: ', mae))
+}
+#+END_SRC
+
+#+RESULTS:
+: Maxdepth: 1	 MAE: 419317.370397848
+: Maxdepth: 2	 MAE: 373918.890797043
+: Maxdepth: 3	 MAE: 334286.707318463
+: Maxdepth: 4	 MAE: 311533.065082263
+: Maxdepth: 5	 MAE: 301217.652503982
+: Maxdepth: 6	 MAE: 298109.622327527
+: Maxdepth: 7	 MAE: 298109.622327527
+: Maxdepth: 8	 MAE: 298109.622327527
+: Maxdepth: 9	 MAE: 298109.622327527
+: Maxdepth: 10	 MAE: 298109.622327527
