@@ -1,0 +1,73 @@
+* Coercion
+
+#+begin_src jupyter-R :session R :async yes
+x <- c(1, "canada", 3)
+#+end_src
+
+#+RESULTS:
+
+#+begin_src jupyter-R :session R :async yes
+x
+#+end_src
+
+#+RESULTS:
+#+begin_export markdown
+1. '1'
+2. 'canada'
+3. '3'
+#+end_export
+
+#+begin_src jupyter-R :session R :async yes
+class(x)
+#+end_src
+
+#+RESULTS:
+#+begin_export markdown
+'character'
+#+end_export
+
+#+begin_src jupyter-R :session R :async yes
+x <- 1:5
+y <- as.character(x)
+y
+#+end_src
+
+#+RESULTS:
+#+begin_export markdown
+1. '1'
+2. '2'
+3. '3'
+4. '4'
+5. '5'
+#+end_export
+
+#+begin_src jupyter-R :session R :async yes
+as.numeric(y)
+#+end_src
+
+#+RESULTS:
+#+begin_export markdown
+1. 1
+2. 2
+3. 3
+4. 4
+5. 5
+#+end_export
+
+** Not availables (NA)
+
+#+begin_src jupyter-R :session R :async yes
+x <- c("1", "b", "3")
+as.numeric(x)
+#+end_src
+
+#+RESULTS:
+:RESULTS:
+: Warning message in eval(expr, envir, enclos):
+: “NAs introduced by coercion”
+#+begin_export markdown
+1. 1
+2. &lt;NA&gt;
+3. 3
+#+end_export
+:END:
