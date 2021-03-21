@@ -1,0 +1,34 @@
+* Exercises
+
+** Exercise 1
+
+#+begin_src jupyter-R :session R :async yes
+100 * (100 + 1) / 2
+#+end_src
+
+#+RESULTS:
+#+begin_export markdown
+5050
+#+end_export
+
+** Exercise 2
+
+#+begin_src jupyter-R :session R :async yes
+1000 * (1000 + 1) / 2
+#+end_src
+
+#+RESULTS:
+#+begin_export markdown
+500500
+#+end_export
+
+** Exercise 4
+
+#+begin_src jupyter-R :session R :async yes
+log10(sqrt(100))
+#+end_src
+
+#+RESULTS:
+#+begin_export markdown
+1
+#+end_export
