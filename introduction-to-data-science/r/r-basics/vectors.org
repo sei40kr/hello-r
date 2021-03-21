@@ -1,0 +1,180 @@
+* Vectors
+
+** Creating vectors
+
+#+begin_src jupyter-R :session R :async yes
+codes <- c(380, 124, 818)
+codes
+#+end_src
+
+#+RESULTS:
+#+begin_export markdown
+1. 380
+2. 124
+3. 818
+#+end_export
+
+#+begin_src jupyter-R :session R :async yes
+# You can also use single quotes
+country <- c('italy', 'canada', 'egypt')
+#+end_src
+
+#+RESULTS:
+
+** Names
+
+#+begin_src jupyter-R :session R :async yes
+codes <- c(italy = 380, canada = 124, egypt = 818)
+codes
+#+end_src
+
+#+RESULTS:
+#+begin_export markdown
+italy
+:   380canada
+:   124egypt
+:   818
+#+end_export
+
+#+begin_src jupyter-R :session R :async yes
+names(codes)
+#+end_src
+
+#+RESULTS:
+#+begin_export markdown
+1. 'italy'
+2. 'canada'
+3. 'egypt'
+#+end_export
+
+There is no difference between this function call and the previous one:
+
+#+begin_src jupyter-R :session R :async yes
+codes <- c(380, 124, 818)
+country <- c("italy", "canada", "egypt")
+#+end_src
+
+#+RESULTS:
+
+** Sequences
+
+Useful function for creating vectors generates sequences:
+
+#+begin_src jupyter-R :session R :async yes
+seq(1, 10)
+#+end_src
+
+#+RESULTS:
+#+begin_export markdown
+1. 1
+2. 2
+3. 3
+4. 4
+5. 5
+6. 6
+7. 7
+8. 8
+9. 9
+10. 10
+#+end_export
+
+#+begin_src jupyter-R :session R :async yes
+seq(1, 10, 2)
+#+end_src
+
+#+RESULTS:
+#+begin_export markdown
+1. 1
+2. 3
+3. 5
+4. 7
+5. 9
+#+end_export
+
+We can use the following shorthand:
+
+#+begin_src jupyter-R :session R :async yes
+1:10
+#+end_src
+
+#+RESULTS:
+#+begin_export markdown
+1. 1
+2. 2
+3. 3
+4. 4
+5. 5
+6. 6
+7. 7
+8. 8
+9. 9
+10. 10
+#+end_export
+
+#+begin_src jupyter-R :session R :async yes
+class(1:10)
+#+end_src
+
+#+RESULTS:
+#+begin_export markdown
+'integer'
+#+end_export
+
+#+begin_src jupyter-R :session R :async yes
+class(seq(1, 10, 0.5))
+#+end_src
+
+#+RESULTS:
+#+begin_export markdown
+'numeric'
+#+end_export
+
+** Subsetting
+
+#+begin_src jupyter-R :session R :async yes
+codes[2]
+#+end_src
+
+#+RESULTS:
+#+begin_export markdown
+124
+#+end_export
+
+#+begin_src jupyter-R :session R :async yes
+codes[c(1,3)]
+#+end_src
+
+#+RESULTS:
+#+begin_export markdown
+1. 380
+2. 818
+#+end_export
+
+#+begin_src jupyter-R :session R :async yes
+codes[1:2]
+#+end_src
+
+#+RESULTS:
+#+begin_export markdown
+1. 380
+2. 124
+#+end_export
+
+#+begin_src jupyter-R :session R :async yes
+codes["canada"]
+#+end_src
+
+#+RESULTS:
+#+begin_export markdown
+&lt;NA&gt;
+#+end_export
+
+#+begin_src jupyter-R :session R :async yes
+codes[c("egypt", "italy")]
+#+end_src
+
+#+RESULTS:
+#+begin_export markdown
+1. &lt;NA&gt;
+2. &lt;NA&gt;
+#+end_export
