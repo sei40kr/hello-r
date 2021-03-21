@@ -1,0 +1,73 @@
+* Basic Plots
+
+** =plot=
+
+#+begin_src jupyter-R :session R :async yes
+x <- murders$population / 10^6
+y <- murders$total
+plot(x, y)
+#+end_src
+
+#+RESULTS:
+:RESULTS:
+#+attr_org: :width 420 :height 420
+[[file:./.ob-jupyter/9b997a55f7784e3dc11e9154545dd91fa8c67f90.png]]
+:END:
+
+#+begin_src jupyter-R :session R :async yes
+with(murders, plot(population, total))
+#+end_src
+
+#+RESULTS:
+:RESULTS:
+#+attr_org: :width 420 :height 420
+[[file:./.ob-jupyter/8616c4fbf64828f8b1db82a749d411ac822b0634.png]]
+:END:
+
+** =hist=
+
+#+begin_src jupyter-R :session R :async yes
+x <- with(murders, total / population * 100000)
+hist(x)
+#+end_src
+
+#+RESULTS:
+:RESULTS:
+#+attr_org: :width 420 :height 420
+[[file:./.ob-jupyter/06c9a804ff3e96f681757921df97f0e1c13ad8f1.png]]
+:END:
+
+#+begin_src jupyter-R :session R :async yes
+murders$state[which.max(x)]
+#+end_src
+
+#+RESULTS:
+#+begin_export markdown
+'District of Columbia'
+#+end_export
+
+** =boxplot=
+
+#+begin_src jupyter-R :session R :async yes
+murders$rate <- with(murders, total / population * 100000)
+boxplot(rate ~ region, data = murders)
+#+end_src
+
+#+RESULTS:
+:RESULTS:
+#+attr_org: :width 420 :height 420
+[[file:./.ob-jupyter/fbe5220cf27fa2fcf549c0532496fed0f3d86f2f.png]]
+:END:
+
+** =image=
+
+#+begin_src jupyter-R :session R :async yes
+x <- matrix(1:120, 12, 10)
+image(x)
+#+end_src
+
+#+RESULTS:
+:RESULTS:
+#+attr_org: :width 420 :height 420
+[[file:./.ob-jupyter/f3ee3b0d6c47bd638022a63ed519afc6b19c9c95.png]]
+:END:
