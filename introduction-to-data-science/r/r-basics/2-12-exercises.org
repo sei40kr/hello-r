@@ -1,0 +1,51 @@
+* Exercises
+
+** Exercise 1
+
+#+begin_src jupyter-R :session R :async yes
+temp <- c(35, 88, 42, 84, 81, 30)
+temp <- 5 / 9 * (temp - 32)
+city <- c("Beijing", "Lagos", "Paris", "Rio de Janeiro", "San Juan", "Toronto")
+city_temps <- data.frame(name = city, temperature = temp)
+city_temps
+#+end_src
+
+#+RESULTS:
+#+begin_export markdown
+
+A data.frame: 6 x 2
+
+| name &lt;chr&gt; | temperature &lt;dbl&gt; |
+|---|---|
+| Beijing        |  1.666667 |
+| Lagos          | 31.111111 |
+| Paris          |  5.555556 |
+| Rio de Janeiro | 28.888889 |
+| San Juan       | 27.222222 |
+| Toronto        | -1.111111 |
+#+end_export
+
+** Exercise 2
+
+#+begin_src jupyter-R :session R :async yes
+sum(1 / (1:100) ** 2)
+#+end_src
+
+#+RESULTS:
+#+begin_export markdown
+1.63498390018489
+#+end_export
+
+** Exercise 3
+
+#+begin_src jupyter-R :session R :async yes
+library(dslabs)
+data(murders)
+murder_rate <- murders$total / murders$population * 100000
+mean(murder_rate)
+#+end_src
+
+#+RESULTS:
+#+begin_export markdown
+2.77912545066711
+#+end_export
