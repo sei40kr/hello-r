@@ -1,0 +1,224 @@
+* Exercises
+
+** Exercise 1
+
+#+begin_src jupyter-R :session R :async yes
+temp <- c(35, 88, 42, 84, 81, 30)
+#+end_src
+
+#+RESULTS:
+
+** Exercise 2
+
+#+begin_src jupyter-R :session R :async yes
+city <- c("Beijing", "Lagos", "Paris", "Rio de Janeiro", "San Juan", "Toronto")
+#+end_src
+
+#+RESULTS:
+
+** Exercise 3
+
+#+begin_src jupyter-R :session R :async yes
+names(temp) <- city
+#+end_src
+
+#+RESULTS:
+
+** Exercise 4
+
+#+begin_src jupyter-R :session R :async yes
+city[1:3]
+#+end_src
+
+#+RESULTS:
+#+begin_export markdown
+1. 'Beijing'
+2. 'Lagos'
+3. 'Paris'
+#+end_export
+
+** Exercise 5
+
+#+begin_src jupyter-R :session R :async yes
+temp["Paris"]
+temp["San Juan"]
+#+end_src
+
+#+RESULTS:
+:RESULTS:
+#+begin_export MARKDOWN
+**Paris:** 42
+#+end_export
+#+begin_export markdown
+**San Juan:** 81
+#+end_export
+:END:
+** Exercise 6
+
+#+begin_src jupyter-R :session R :async yes
+12:73
+#+end_src
+
+#+RESULTS:
+#+begin_export markdown
+1. 12
+2. 13
+3. 14
+4. 15
+5. 16
+6. 17
+7. 18
+8. 19
+9. 20
+10. 21
+11. 22
+12. 23
+13. 24
+14. 25
+15. 26
+16. 27
+17. 28
+18. 29
+19. 30
+20. 31
+21. 32
+22. 33
+23. 34
+24. 35
+25. 36
+26. 37
+27. 38
+28. 39
+29. 40
+30. 41
+31. 42
+32. 43
+33. 44
+34. 45
+35. 46
+36. 47
+37. 48
+38. 49
+39. 50
+40. 51
+41. 52
+42. 53
+43. 54
+44. 55
+45. 56
+46. 57
+47. 58
+48. 59
+49. 60
+50. 61
+51. 62
+52. 63
+53. 64
+54. 65
+55. 66
+56. 67
+57. 68
+58. 69
+59. 70
+60. 71
+61. 72
+62. 73
+#+end_export
+
+** Exercise 7
+
+#+begin_src jupyter-R :session R :async yes
+x <- (1:99)
+x[x %% 2 == 1]
+#+end_src
+
+#+RESULTS:
+#+begin_export markdown
+1. 1
+2. 3
+3. 5
+4. 7
+5. 9
+6. 11
+7. 13
+8. 15
+9. 17
+10. 19
+11. 21
+12. 23
+13. 25
+14. 27
+15. 29
+16. 31
+17. 33
+18. 35
+19. 37
+20. 39
+21. 41
+22. 43
+23. 45
+24. 47
+25. 49
+26. 51
+27. 53
+28. 55
+29. 57
+30. 59
+31. 61
+32. 63
+33. 65
+34. 67
+35. 69
+36. 71
+37. 73
+38. 75
+39. 77
+40. 79
+41. 81
+42. 83
+43. 85
+44. 87
+45. 89
+46. 91
+47. 93
+48. 95
+49. 97
+50. 99
+#+end_export
+
+** Exercise 8
+
+#+begin_src jupyter-R :session R :async yes
+y <- seq(6, 55, 4 / 7)
+length(y)
+#+end_src
+
+#+RESULTS:
+#+begin_export markdown
+86
+#+end_export
+
+** Exercise 11
+
+#+begin_src jupyter-R :session R :async yes
+class(1L)
+#+end_src
+
+#+RESULTS:
+#+begin_export markdown
+'integer'
+#+end_export
+
+** Exercise 12
+
+#+begin_src jupyter-R :session R :async yes
+x <- c("1", "3", "5")
+as.integer(x)
+#+end_src
+
+#+RESULTS:
+#+begin_export markdown
+1. 1
+2. 3
+3. 5
+#+end_export
