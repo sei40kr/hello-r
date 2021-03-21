@@ -1,0 +1,268 @@
+* Sorting
+
+** =sort=
+
+#+begin_src jupyter-R :session R :async yes
+library(dslabs)
+data(murders)
+sort(murders$total)
+#+end_src
+
+#+RESULTS:
+#+begin_export markdown
+1. 2
+2. 4
+3. 5
+4. 5
+5. 7
+6. 8
+7. 11
+8. 12
+9. 12
+10. 16
+11. 19
+12. 21
+13. 22
+14. 27
+15. 32
+16. 36
+17. 38
+18. 53
+19. 63
+20. 65
+21. 67
+22. 84
+23. 93
+24. 93
+25. 97
+26. 97
+27. 99
+28. 111
+29. 116
+30. 118
+31. 120
+32. 135
+33. 142
+34. 207
+35. 219
+36. 232
+37. 246
+38. 250
+39. 286
+40. 293
+41. 310
+42. 321
+43. 351
+44. 364
+45. 376
+46. 413
+47. 457
+48. 517
+49. 669
+50. 805
+51. 1257
+#+end_export
+
+** =order=
+
+#+begin_src jupyter-R :session R :async yes
+x <- c(31, 4, 15, 92, 65)
+sort(x)
+#+end_src
+
+#+RESULTS:
+#+begin_export markdown
+1. 4
+2. 15
+3. 31
+4. 65
+5. 92
+#+end_export
+
+#+begin_src jupyter-R :session R :async yes
+index <- order(x)
+x[index]
+#+end_src
+
+#+RESULTS:
+#+begin_export markdown
+1. 4
+2. 15
+3. 31
+4. 65
+5. 92
+#+end_export
+
+#+begin_src jupyter-R :session R :async yes
+x
+#+end_src
+
+#+RESULTS:
+#+begin_export markdown
+1. 31
+2. 4
+3. 15
+4. 92
+5. 65
+#+end_export
+
+#+begin_src jupyter-R :session R :async yes
+order(x)
+#+end_src
+
+#+RESULTS:
+#+begin_export markdown
+1. 2
+2. 3
+3. 1
+4. 5
+5. 4
+#+end_export
+
+#+begin_src jupyter-R :session R :async yes
+murders$state[1:6]
+#+end_src
+
+#+RESULTS:
+#+begin_export markdown
+1. 'Alabama'
+2. 'Alaska'
+3. 'Arizona'
+4. 'Arkansas'
+5. 'California'
+6. 'Colorado'
+#+end_export
+
+#+begin_src jupyter-R :session R :async yes
+murders$ab[1:6]
+#+end_src
+
+#+RESULTS:
+#+begin_export markdown
+1. 'AL'
+2. 'AK'
+3. 'AZ'
+4. 'AR'
+5. 'CA'
+6. 'CO'
+#+end_export
+
+#+begin_src jupyter-R :session R :async yes
+ind <- order(murders$total)
+murders$abb[ind]
+#+end_src
+
+#+RESULTS:
+#+begin_export markdown
+1. 'VT'
+2. 'ND'
+3. 'NH'
+4. 'WY'
+5. 'HI'
+6. 'SD'
+7. 'ME'
+8. 'ID'
+9. 'MT'
+10. 'RI'
+11. 'AK'
+12. 'IA'
+13. 'UT'
+14. 'WV'
+15. 'NE'
+16. 'OR'
+17. 'DE'
+18. 'MN'
+19. 'KS'
+20. 'CO'
+21. 'NM'
+22. 'NV'
+23. 'AR'
+24. 'WA'
+25. 'CT'
+26. 'WI'
+27. 'DC'
+28. 'OK'
+29. 'KY'
+30. 'MA'
+31. 'MS'
+32. 'AL'
+33. 'IN'
+34. 'SC'
+35. 'TN'
+36. 'AZ'
+37. 'NJ'
+38. 'VA'
+39. 'NC'
+40. 'MD'
+41. 'OH'
+42. 'MO'
+43. 'LA'
+44. 'IL'
+45. 'GA'
+46. 'MI'
+47. 'PA'
+48. 'NY'
+49. 'FL'
+50. 'TX'
+51. 'CA'
+#+end_export
+
+** =max= and =which.max=
+
+#+begin_src jupyter-R :session R :async yes
+max(murders$total)
+#+end_src
+
+#+RESULTS:
+#+begin_export markdown
+1257
+#+end_export
+
+#+begin_src jupyter-R :session R :async yes
+i_max <- which.max(murders$total)
+murders$state[i_max]
+#+end_src
+
+#+RESULTS:
+#+begin_export markdown
+'California'
+#+end_export
+
+** =rank=
+
+#+begin_src jupyter-R :session R :async yes
+x <- c(31, 4, 15, 92, 65)
+rank(x)
+#+end_src
+
+#+RESULTS:
+#+begin_export markdown
+1. 3
+2. 1
+3. 2
+4. 5
+5. 4
+#+end_export
+
+** Beware of recycling
+
+#+begin_src jupyter-R :session R :async yes
+x <- c(1, 2, 3)
+y <- c(10, 20, 30, 40, 50, 60, 70)
+x + y
+#+end_src
+
+#+RESULTS:
+:RESULTS:
+: Warning message in x + y:
+: “longer object length is not a multiple of shorter object length”
+#+begin_export markdown
+1. 11
+2. 22
+3. 33
+4. 41
+5. 52
+6. 63
+7. 71
+#+end_export
+:END:
