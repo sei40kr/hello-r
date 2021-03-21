@@ -1,0 +1,217 @@
+* Exercises
+
+#+begin_src jupyter-R :session R :async yes
+library(dslabs)
+data(murders)
+#+end_src
+
+#+RESULTS:
+
+** Exercise 1
+
+#+begin_src jupyter-R :session R :async yes
+pop <- murders$population
+pop <- sort(pop)
+pop[1]
+#+end_src
+
+#+RESULTS:
+#+begin_export markdown
+563626
+#+end_export
+
+** Exercise 2
+
+#+begin_src jupyter-R :session R :async yes
+ind <- order(murders$population)
+ind[1]
+#+end_src
+
+#+RESULTS:
+#+begin_export markdown
+51
+#+end_export
+
+** Exercise 3
+
+#+begin_src jupyter-R :session R :async yes
+which.min(murders$population)
+#+end_src
+
+#+RESULTS:
+#+begin_export markdown
+51
+#+end_export
+
+** Exercise 4
+
+#+begin_src jupyter-R :session R :async yes
+states <- murders$state
+states[which.min(murders$population)]
+#+end_src
+
+#+RESULTS:
+#+begin_export markdown
+'Wyoming'
+#+end_export
+
+** Exercise 5
+
+#+begin_src jupyter-R :session R :async yes
+ranks <- rank(murders$population)
+my_df <- data.frame(state = murders$state, rank = ranks)
+my_df
+#+end_src
+
+#+RESULTS:
+#+begin_export markdown
+
+A data.frame: 51 x 2
+
+| state &lt;chr&gt; | rank &lt;dbl&gt; |
+|---|---|
+| Alabama              | 29 |
+| Alaska               |  5 |
+| Arizona              | 36 |
+| Arkansas             | 20 |
+| California           | 51 |
+| Colorado             | 30 |
+| Connecticut          | 23 |
+| Delaware             |  7 |
+| District of Columbia |  2 |
+| Florida              | 49 |
+| Georgia              | 44 |
+| Hawaii               | 12 |
+| Idaho                | 13 |
+| Illinois             | 47 |
+| Indiana              | 37 |
+| Iowa                 | 22 |
+| Kansas               | 19 |
+| Kentucky             | 26 |
+| Louisiana            | 27 |
+| Maine                | 11 |
+| Maryland             | 33 |
+| Massachusetts        | 38 |
+| Michigan             | 43 |
+| Minnesota            | 31 |
+| Mississippi          | 21 |
+| Missouri             | 34 |
+| Montana              |  8 |
+| Nebraska             | 14 |
+| Nevada               | 17 |
+| New Hampshire        | 10 |
+| New Jersey           | 41 |
+| New Mexico           | 16 |
+| New York             | 48 |
+| North Carolina       | 42 |
+| North Dakota         |  4 |
+| Ohio                 | 45 |
+| Oklahoma             | 24 |
+| Oregon               | 25 |
+| Pennsylvania         | 46 |
+| Rhode Island         |  9 |
+| South Carolina       | 28 |
+| South Dakota         |  6 |
+| Tennessee            | 35 |
+| Texas                | 50 |
+| Utah                 | 18 |
+| Vermont              |  3 |
+| Virginia             | 40 |
+| Washington           | 39 |
+| West Virginia        | 15 |
+| Wisconsin            | 32 |
+| Wyoming              |  1 |
+#+end_export
+
+** Exercise 6
+
+#+begin_src jupyter-R :session R :async yes
+ind <- order(murders$population)
+ranks <- rank(murders$population[ind])
+my_df <- data.frame(state = murders$state[ind], rank = ranks)
+my_df
+#+end_src
+
+#+RESULTS:
+#+begin_export markdown
+
+A data.frame: 51 x 2
+
+| state &lt;chr&gt; | rank &lt;dbl&gt; |
+|---|---|
+| Wyoming              |  1 |
+| District of Columbia |  2 |
+| Vermont              |  3 |
+| North Dakota         |  4 |
+| Alaska               |  5 |
+| South Dakota         |  6 |
+| Delaware             |  7 |
+| Montana              |  8 |
+| Rhode Island         |  9 |
+| New Hampshire        | 10 |
+| Maine                | 11 |
+| Hawaii               | 12 |
+| Idaho                | 13 |
+| Nebraska             | 14 |
+| West Virginia        | 15 |
+| New Mexico           | 16 |
+| Nevada               | 17 |
+| Utah                 | 18 |
+| Kansas               | 19 |
+| Arkansas             | 20 |
+| Mississippi          | 21 |
+| Iowa                 | 22 |
+| Connecticut          | 23 |
+| Oklahoma             | 24 |
+| Oregon               | 25 |
+| Kentucky             | 26 |
+| Louisiana            | 27 |
+| South Carolina       | 28 |
+| Alabama              | 29 |
+| Colorado             | 30 |
+| Minnesota            | 31 |
+| Wisconsin            | 32 |
+| Maryland             | 33 |
+| Missouri             | 34 |
+| Tennessee            | 35 |
+| Arizona              | 36 |
+| Indiana              | 37 |
+| Massachusetts        | 38 |
+| Washington           | 39 |
+| Virginia             | 40 |
+| New Jersey           | 41 |
+| North Carolina       | 42 |
+| Michigan             | 43 |
+| Georgia              | 44 |
+| Ohio                 | 45 |
+| Pennsylvania         | 46 |
+| Illinois             | 47 |
+| New York             | 48 |
+| Florida              | 49 |
+| Texas                | 50 |
+| California           | 51 |
+#+end_export
+
+** Exercise 7
+
+#+begin_src jupyter-R :session R :async yes
+data("na_example")
+length(na_example[is.na(na_example)])
+#+end_src
+
+#+RESULTS:
+#+begin_export markdown
+145
+#+end_export
+
+** Exercise 8
+
+#+begin_src jupyter-R :session R :async yes
+data("na_example")
+mean(na_example[!is.na(na_example)])
+#+end_src
+
+#+RESULTS:
+#+begin_export markdown
+2.30175438596491
+#+end_export
