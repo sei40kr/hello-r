@@ -1,0 +1,46 @@
+* Exercises
+
+#+begin_src jupyter-R :session R :async yes
+library(dslabs)
+data(murders)
+
+population_in_millions <- murders$population / 10^6
+total_gun_murders <- murders$total
+#+end_src
+
+
+** Exercise 1
+
+#+begin_src jupyter-R :session R :async yes
+plot(log10(population_in_millions), total_gun_murders)
+#+end_src
+
+#+RESULTS:
+:RESULTS:
+#+attr_org: :width 420 :height 420
+[[file:./.ob-jupyter/62f10a4f6fa1c3f3174a81821ae14bc077652ecf.png]]
+:END:
+
+** Exercise 2
+
+#+begin_src jupyter-R :session R :async yes
+hist(murders$population)
+#+end_src
+
+#+RESULTS:
+:RESULTS:
+#+attr_org: :width 420 :height 420
+[[file:./.ob-jupyter/eb8e074c32314113f2d3448c8a8bc337ac503bf6.png]]
+:END:
+
+** Exercise 3
+
+#+begin_src jupyter-R :session R :async yes
+boxplot(population ~ region, data = murders)
+#+end_src
+
+#+RESULTS:
+:RESULTS:
+#+attr_org: :width 420 :height 420
+[[file:./.ob-jupyter/3460f89effd253a8daa6d64204148a87de410b0b.png]]
+:END:
