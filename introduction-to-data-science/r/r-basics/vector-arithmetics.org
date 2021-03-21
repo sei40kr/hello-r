@@ -1,0 +1,103 @@
+* Vector arithmetics
+
+#+begin_src jupyter-R :session R :async yes
+library(dslabs)
+data(murders)
+murders$state[which.max(murders$population)]
+#+end_src
+
+#+RESULTS:
+#+begin_export markdown
+'California'
+#+end_export
+
+** Rescaling a vector
+
+#+begin_src jupyter-R :session R :async yes
+inches <- c(69, 62, 66, 70, 70, 73, 67, 70)
+#+end_src
+
+#+RESULTS:
+
+#+begin_src jupyter-R :session R :async yes
+inches * 2.54
+#+end_src
+
+#+RESULTS:
+#+begin_export markdown
+1. 175.26
+2. 157.48
+3. 167.64
+4. 177.8
+5. 177.8
+6. 185.42
+7. 170.18
+8. 177.8
+#+end_export
+
+** Two vectors
+
+#+begin_src jupyter-R :session R :async yes
+murder_rate <- murders$total / murders$population * 100000
+#+end_src
+
+#+RESULTS:
+
+#+begin_src jupyter-R :session R :async yes
+murders$abb[order(murder_rate)]
+#+end_src
+
+#+RESULTS:
+#+begin_export markdown
+1. 'VT'
+2. 'NH'
+3. 'HI'
+4. 'ND'
+5. 'IA'
+6. 'ID'
+7. 'UT'
+8. 'ME'
+9. 'WY'
+10. 'OR'
+11. 'SD'
+12. 'MN'
+13. 'MT'
+14. 'CO'
+15. 'WA'
+16. 'WV'
+17. 'RI'
+18. 'WI'
+19. 'NE'
+20. 'MA'
+21. 'IN'
+22. 'KS'
+23. 'NY'
+24. 'KY'
+25. 'AK'
+26. 'OH'
+27. 'CT'
+28. 'NJ'
+29. 'AL'
+30. 'IL'
+31. 'OK'
+32. 'NC'
+33. 'NV'
+34. 'VA'
+35. 'AR'
+36. 'TX'
+37. 'NM'
+38. 'CA'
+39. 'FL'
+40. 'TN'
+41. 'PA'
+42. 'AZ'
+43. 'GA'
+44. 'MS'
+45. 'MI'
+46. 'DE'
+47. 'SC'
+48. 'MD'
+49. 'MO'
+50. 'LA'
+51. 'DC'
+#+end_export
